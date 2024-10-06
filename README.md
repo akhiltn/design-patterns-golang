@@ -20,3 +20,5 @@ GOF design pattern in GO
 ## Concurrency Patterns (specific to Go):
 - Pipeline: Passes data through stages of transformations.
 - Worker Pools: Distributes tasks among workers.
+- Channel Oriented Patterns: Communication between goroutines.
+- Context Pattern: Useful for controlling goroutine lifecycles, canceling operations, and managing deadlines.

@@ -10,7 +10,7 @@ var testcase = map[string]string{
 }
 
 // TestGetAnimal tests the GetAnimal function
-func TestGetAnimal(t *testing.T) {
+func TestFactory(t *testing.T) {
     for k, v := range testcase {
         animal := GetAnimal(k)
         if animal == nil {
