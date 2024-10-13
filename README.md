@@ -19,7 +19,10 @@ namespace SingletonPattern{
 ```mermaid
 classDiagram
 
-    AnimalFactory --> Animal : "creates"
+    AnimalFactory *-- Animal : "creates"
+    Animal <|-- Dog
+    Animal <|-- Cat
+
 
 namespace FactoryPattern{
     class Animal {
@@ -34,9 +37,6 @@ namespace FactoryPattern{
     class Cat {
         + Speak() string
     }
-
-    Animal <|-- Dog
-    Animal <|-- Cat
 
     class AnimalFactory {
         + GetAnimal(animal string) Animal
