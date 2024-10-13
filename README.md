@@ -6,15 +6,22 @@ GOF design pattern in GO
 - Singleton: Ensures a class has only one instance.
 ```mermaid
 classDiagram
+
+namespace SingletonPattern{
     class Singleton {
         - int count
         - Singleton()
         + GetInstance()$ Singleton
     }
+}
 ```
 - Factory: Hides the instantiation logic.
 ```mermaid
 classDiagram
+
+    AnimalFactory --> Animal : "creates"
+
+namespace FactoryPattern{
     class Animal {
         <<interface>>
         + Speak() string
@@ -34,12 +41,16 @@ classDiagram
     class AnimalFactory {
         + GetAnimal(animal string) Animal
     }
-
-    AnimalFactory --> Animal : "creates"
+}
 ```
 - Builder: Constructs complex objects step by step.
 ```mermaid
 classDiagram
+
+    Director --> HouseBuilder : "uses"
+    HouseBuilder --> House : "builds"
+
+namespace BuilderPattern{
     class House {
         - string Foundation
         - string Roof
@@ -59,14 +70,65 @@ classDiagram
         + setBuilder(b HouseBuilder) void
         + getHouse() House
     }
-
-    Director --> HouseBuilder : "uses"
-    HouseBuilder --> House : "builds"
+}
 ```
 
 ## Structural Patterns:
 - Adapter: Bridges incompatibility between interfaces.
+```mermaid
+classDiagram
+
+    IToyBird <|-- BirdAdapter
+    BirdAdapter *-- Bird
+
+namespace AdapterPattern{
+    class IToyBird {
+        <<interface>>
+        + MakeSound()
+    }
+
+    class Bird {
+        + Fly()    
+        + Chirp()
+    }
+
+    class BirdAdapter {
+        - Bird bird
+        + BirdAdapter(Bird)
+        + MakeSound()
+    }
+}
+```
 - Decorator: Adds responsibilities to objects dynamically.
+```mermaid
+classDiagram
+
+    Coffee <|-- SimpleCoffee
+    Coffee <|-- SugarCoffeeDecorator
+    Coffee <|-- MilkCoffeeDecorator
+    SugarCoffeeDecorator *-- Coffee : "decorates"
+    MilkCoffeeDecorator *-- Coffee : "decorates"
+
+namespace DecoratorPattern{
+    class Coffee{
+        <<interface>>
+        + GetCost() int
+        + GetDescription() string
+    }
+    
+    class SimpleCoffee
+
+    class SugarCoffeeDecorator{
+        - Coffee
+        + NewSugarCoffeeDecorator(Coffee) Coffee
+    }
+
+    class MilkCoffeeDecorator{
+        - Coffee
+        + NewMilkCoffeeDecorator(Coffee) Coffee
+    }
+}
+```
 - Composite: Treats individual objects and compositions uniformly.
 
 ## Behavioral Patterns:
