@@ -130,6 +130,31 @@ namespace DecoratorPattern{
 }
 ```
 - Composite: Treats individual objects and compositions uniformly.
+```mermaid
+classDiagram
+
+    Component <|-- Composite
+    Component <|-- Leaf
+    Composite *-- "1..*" Component
+
+    namespace CompositePattern {
+        class Component {
+            <<interface>>
+            + Operation()
+        }
+
+        class Composite {
+            - components: []Component
+            + Add(component: Component)
+            + Remove(component: Component)
+            + Operation()
+        }
+
+        class Leaf {
+            + Operation()
+        }
+    }
+```
 
 ## Behavioral Patterns:
 - Strategy: Encapsulates algorithms within a family.

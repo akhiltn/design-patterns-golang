@@ -17,18 +17,6 @@ func (s *SimpleCoffee) GetDescription() string {
   return "Simple Coffee"
 }
 
-// type CoffeeDecorator struct {
-//   coffee Coffee
-// }
-
-// func (c *CoffeeDecorator) GetCost() float32 {
-//   return c.coffee.GetCost()
-// }
-
-// func (c *CoffeeDecorator) GetDescription() string {
-//   return c.coffee.GetDescription();
-// }
-
 type MilkCoffee struct {
   coffee Coffee
 }
