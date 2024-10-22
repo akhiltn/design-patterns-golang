@@ -5,6 +5,9 @@ GOF design pattern in GO
 ## Creational Patterns:
 - Singleton: Ensures a class has only one instance.
 ```mermaid
+---
+title: SingletonPattern
+---
 classDiagram
 
 namespace SingletonPattern{
@@ -102,12 +105,10 @@ namespace AdapterPattern{
 - Decorator: Adds responsibilities to objects dynamically.
 ```mermaid
 classDiagram
-
-    Coffee <|-- SimpleCoffee
-    Coffee <|-- SugarCoffeeDecorator
-    Coffee <|-- MilkCoffeeDecorator
-    SugarCoffeeDecorator *-- Coffee : "decorates"
-    MilkCoffeeDecorator *-- Coffee : "decorates"
+    Coffee <|.. SimpleCoffee
+    Coffee <|.. CoffeDecorator
+    CoffeDecorator <|-- SugarCoffeeDecorator : "decorates"
+    CoffeDecorator <|-- MilkCoffeeDecorator : "decorates"
 
 namespace DecoratorPattern{
     class Coffee{
@@ -118,16 +119,19 @@ namespace DecoratorPattern{
     
     class SimpleCoffee
 
+    class CoffeDecorator{
+        - coffee Coffee
+    }
+
     class SugarCoffeeDecorator{
-        - Coffee
-        + NewSugarCoffeeDecorator(Coffee) Coffee
+        + GetCost() int
+        + GetDescription() string
     }
 
     class MilkCoffeeDecorator{
-        - Coffee
-        + NewMilkCoffeeDecorator(Coffee) Coffee
+        + GetCost() int
+        + GetDescription() string
     }
-}
 ```
 - Composite: Treats individual objects and compositions uniformly.
 ```mermaid
@@ -158,6 +162,36 @@ classDiagram
 
 ## Behavioral Patterns:
 - Strategy: Encapsulates algorithms within a family.
+```mermaid
+classDiagram
+    PaymentGateway <|.. CreditcardPayment
+    PaymentGateway <|.. BitcoinPayment
+    PaymentGateway <|.. PaypalPayment
+    ShoppingCart <-- PaymentGateway
+    
+    namespace StrategyPattern {
+        class PaymentGateway {
+            <<interface>>
+            Pay(amount float) string
+        }
+
+        class CreditcardPayment {
+            Pay(amount float) string
+        }
+
+        class BitcoinPayment {
+            Pay(amount float) string
+        }
+        
+        class PaypalPayment {
+            Pay(amount float) string
+        }
+        
+        class ShoppingCart {
+            +payment PaymentGateway
+        }
+    }
+```
 - Observer: Notifies dependents of state changes.
 - Command: Encapsulates method invocation.
 
