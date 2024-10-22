@@ -107,7 +107,7 @@ classDiagram
 ```mermaid
 classDiagram
     Coffee <|.. SimpleCoffee
-    Coffee <|-- CoffeeDecorator
+    Coffee <|.. CoffeeDecorator
     CoffeeDecorator <|-- MilkCoffee : "decorates"
     CoffeeDecorator <|-- SugarCoffee : "decorates"
 
