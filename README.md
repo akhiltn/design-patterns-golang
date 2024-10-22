@@ -24,8 +24,8 @@ title: FactoryPattern
 classDiagram
 
     AnimalFactory *-- Animal : "creates"
-    Animal <|-- Dog
-    Animal <|-- Cat
+    Animal <|.. Dog
+    Animal <|.. Cat
 
 
     class Animal {
