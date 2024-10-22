@@ -7,15 +7,14 @@ import (
 func TestDecorator(t *testing.T) {
 	var coffee Coffee
 	coffee = &SimpleCoffee{}
-  decorator := CoffeeDecorator{coffee}
-  coffee = &MilkCoffee{decorator}
+  coffee = NewMilkCoffee(coffee)
 	if coffee.GetDescription() != "Simple Coffee + milk" {
 		t.Errorf("Expected 'Simple Coffee + milk' but got '%s'", coffee.GetDescription())
 	}
 	if coffee.GetCost() != 15.0 {
 		t.Errorf("Expected 15.0 but got '%f'", coffee.GetCost())
 	}
-	coffee = &SugarCoffee{coffee}
+	coffee = NewSugarCoffee(coffee)
 	if coffee.GetDescription() != "Simple Coffee + milk + sugar" {
 		t.Errorf("Expected 'Simple Coffee + milk + sugar' but got '%s'", coffee.GetDescription())
 	}

@@ -10,16 +10,17 @@ title: SingletonPattern
 ---
 classDiagram
 
-namespace SingletonPattern{
     class Singleton {
         - int count
         - Singleton()
         + GetInstance()$ Singleton
     }
-}
 ```
 - Factory: Hides the instantiation logic.
 ```mermaid
+---
+title: FactoryPattern
+---
 classDiagram
 
     AnimalFactory *-- Animal : "creates"
@@ -27,7 +28,6 @@ classDiagram
     Animal <|-- Cat
 
 
-namespace FactoryPattern{
     class Animal {
         <<interface>>
         + Speak() string
@@ -44,16 +44,17 @@ namespace FactoryPattern{
     class AnimalFactory {
         + GetAnimal(animal string) Animal
     }
-}
 ```
 - Builder: Constructs complex objects step by step.
 ```mermaid
+---
+title: BuilderPattern
+---
 classDiagram
 
     Director --> HouseBuilder : "uses"
     HouseBuilder --> House : "builds"
 
-namespace BuilderPattern{
     class House {
         - string Foundation
         - string Roof
@@ -73,18 +74,19 @@ namespace BuilderPattern{
         + setBuilder(b HouseBuilder) void
         + getHouse() House
     }
-}
 ```
 
 ## Structural Patterns:
 - Adapter: Bridges incompatibility between interfaces.
 ```mermaid
+---
+title: AdapterPattern
+---
 classDiagram
 
     IToyBird <|-- BirdAdapter
     BirdAdapter *-- Bird
 
-namespace AdapterPattern{
     class IToyBird {
         <<interface>>
         + MakeSound()
@@ -100,96 +102,102 @@ namespace AdapterPattern{
         + BirdAdapter(Bird)
         + MakeSound()
     }
-}
 ```
 - Decorator: Adds responsibilities to objects dynamically.
 ```mermaid
 classDiagram
     Coffee <|.. SimpleCoffee
-    Coffee <|.. CoffeDecorator
-    CoffeDecorator <|-- SugarCoffeeDecorator : "decorates"
-    CoffeDecorator <|-- MilkCoffeeDecorator : "decorates"
+    Coffee <|-- CoffeeDecorator
+    CoffeeDecorator <|-- MilkCoffee : "decorates"
+    CoffeeDecorator <|-- SugarCoffee : "decorates"
 
-namespace DecoratorPattern{
-    class Coffee{
+    class Coffee {
         <<interface>>
-        + GetCost() int
+        + GetCost() float32
         + GetDescription() string
     }
-    
-    class SimpleCoffee
 
-    class CoffeDecorator{
+    class SimpleCoffee {
+        + GetCost() float32
+        + GetDescription() string
+    }
+
+    class CoffeeDecorator {
         - coffee Coffee
-    }
-
-    class SugarCoffeeDecorator{
-        + GetCost() int
+        + GetCost() float32
         + GetDescription() string
     }
 
-    class MilkCoffeeDecorator{
-        + GetCost() int
+    class MilkCoffee {
+        + GetCost() float32
+        + GetDescription() string
+    }
+
+    class SugarCoffee {
+        + GetCost() float32
         + GetDescription() string
     }
 ```
 - Composite: Treats individual objects and compositions uniformly.
 ```mermaid
+---
+title: CompositePattern
+---
 classDiagram
 
     Component <|-- Composite
     Component <|-- Leaf
     Composite *-- "1..*" Component
 
-    namespace CompositePattern {
-        class Component {
-            <<interface>>
-            + Operation()
-        }
+    class Component {
+        <<interface>>
+        + Operation()
+    }
 
-        class Composite {
-            - components: []Component
-            + Add(component: Component)
-            + Remove(component: Component)
-            + Operation()
-        }
+    class Composite {
+        - components: []Component
+        + Add(component: Component)
+        + Remove(component: Component)
+        + Operation()
+    }
 
-        class Leaf {
-            + Operation()
-        }
+    class Leaf {
+        + Operation()
     }
 ```
 
 ## Behavioral Patterns:
 - Strategy: Encapsulates algorithms within a family.
 ```mermaid
+---
+title: StrategyPattern
+---
 classDiagram
+
     PaymentGateway <|.. CreditcardPayment
     PaymentGateway <|.. BitcoinPayment
     PaymentGateway <|.. PaypalPayment
     ShoppingCart <-- PaymentGateway
     
-    namespace StrategyPattern {
-        class PaymentGateway {
-            <<interface>>
-            Pay(amount float) string
-        }
+    class PaymentGateway {
+        <<interface>>
+        Pay(amount float) string
+    }
 
-        class CreditcardPayment {
-            Pay(amount float) string
-        }
+    class CreditcardPayment {
+        Pay(amount float) string
+    }
 
-        class BitcoinPayment {
-            Pay(amount float) string
-        }
-        
-        class PaypalPayment {
-            Pay(amount float) string
-        }
-        
-        class ShoppingCart {
-            +payment PaymentGateway
-        }
+    class BitcoinPayment {
+        Pay(amount float) string
+    }
+    
+    class PaypalPayment {
+        Pay(amount float) string
+    }
+    
+    class ShoppingCart {
+        +payment PaymentGateway
     }
 ```
 - Observer: Notifies dependents of state changes.

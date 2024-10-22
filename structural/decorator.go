@@ -17,7 +17,7 @@ func (s *SimpleCoffee) GetDescription() string {
 }
 
 type CoffeeDecorator struct {
-  coffee Coffee
+	coffee Coffee
 }
 
 func (c *CoffeeDecorator) GetCost() float32 {
@@ -29,25 +29,39 @@ func (c *CoffeeDecorator) GetDescription() string {
 }
 
 type MilkCoffee struct {
-  CoffeeDecorator
+	CoffeeDecorator
+}
+
+// Constructor for MilkCoffee
+func NewMilkCoffee(c Coffee) *MilkCoffee {
+	return &MilkCoffee{
+		CoffeeDecorator: CoffeeDecorator{coffee: c},
+	}
 }
 
 func (c *MilkCoffee) GetCost() float32 {
-	return c.CoffeeDecorator.GetCost() + 5.0
+	return c.coffee.GetCost() + 5.0
 }
 
 func (c *MilkCoffee) GetDescription() string {
-	return c.CoffeeDecorator.GetDescription() + " + milk"
+	return c.coffee.GetDescription() + " + milk"
 }
 
 type SugarCoffee struct {
-  CoffeeDecorator
+	CoffeeDecorator
+}
+
+// Constructor for SugarCoffee
+func NewSugarCoffee(c Coffee) *SugarCoffee {
+	return &SugarCoffee{
+		CoffeeDecorator: CoffeeDecorator{coffee: c},
+	}
 }
 
 func (c *SugarCoffee) GetCost() float32 {
-	return c.CoffeeDecorator.GetCost() + 2.0
+	return c.coffee.GetCost() + 2.0
 }
 
 func (c *SugarCoffee) GetDescription() string {
-	return c.CoffeeDecorator.GetDescription() + " + sugar"
+	return c.coffee.GetDescription() + " + sugar"
 }
