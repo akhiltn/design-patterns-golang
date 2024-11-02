@@ -11,7 +11,7 @@ func TestStrategy(t *testing.T) {
 	for key, value := range testMap {
 		cart := &ShoppingCart{value}
 		if key != cart.payment.Pay(100) {
-			t.Errorf("Expected %s but got %s", key, value)
+			t.Errorf("Expected %s but got %s", key, cart.payment.Pay(100))
 		}
 	}
 }

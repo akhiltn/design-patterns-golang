@@ -201,6 +201,39 @@ classDiagram
     }
 ```
 - Observer: Notifies dependents of state changes.
+```mermaid
+---
+title: ObserverPattern
+---
+classDiagram
+    class Subject {
+        +Attach(Observer)
+        +Detach(Observer)
+        +Notify()
+    }
+
+    class ConcreteSubject {
+        -observers: Observer[]
+        +SetState(state: string)
+        +state: string
+        +Attach(Observer)
+        +Detach(Observer)
+        +Notify()
+    }
+
+    class Observer {
+        +Update(state: string)
+    }
+
+    class ConcreteObserver {
+        +name: string
+        +Update(state: string)
+    }
+
+    Subject <|.. ConcreteSubject
+    Observer <|.. ConcreteObserver
+    ConcreteSubject --> Observer : Notifies
+```
 - Command: Encapsulates method invocation.
 
 ## Concurrency Patterns (specific to Go):
