@@ -235,6 +235,42 @@ classDiagram
     ConcreteSubject --> Observer : Notifies
 ```
 - Command: Encapsulates method invocation.
+```mermaid
+---
+title: Command Pattern Diagram
+---
+classDiagram
+    Command <|.. LightOnCommand
+    Command <|.. LightOffCommand
+    LightOnCommand *-- Light
+    LightOffCommand *-- Light
+    RemoteControl *-- Command
+
+    class Light {
+        +state: bool
+    }
+    
+    class LightOnCommand {
+        +light: Light
+        +Execute()
+    }
+    
+    class LightOffCommand {
+        +light: Light
+        +Execute()
+    }
+
+    class Command {
+        <<interface>>
+        +Execute()
+    }
+
+    class RemoteControl {
+        +command: Command
+        +setCommand(command: Command)
+        +Press()
+    }
+```
 
 ## Concurrency Patterns (specific to Go):
 - Pipeline: Passes data through stages of transformations.
